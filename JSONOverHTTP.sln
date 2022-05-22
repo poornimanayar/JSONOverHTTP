@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32505.426
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JSONOverHTTP.HttpApi", "JSONOverHTTP.HttpApi\JSONOverHTTP.HttpApi.csproj", "{49D9C360-C4BC-45BC-9D2D-EFC3A2D18B07}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JSONOverHTTP.gRPCApi", "JSONOverHTTP.gRPCApi\JSONOverHTTP.gRPCApi.csproj", "{1A346C4E-2868-4820-A848-4F45F5B36E79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSONOverHTTP.GraphQL", "JSONOverHTTP.GraphQL\JSONOverHTTP.GraphQL.csproj", "{3571760C-CF32-4776-857C-C41D32742623}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49D9C360-C4BC-45BC-9D2D-EFC3A2D18B07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49D9C360-C4BC-45BC-9D2D-EFC3A2D18B07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49D9C360-C4BC-45BC-9D2D-EFC3A2D18B07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49D9C360-C4BC-45BC-9D2D-EFC3A2D18B07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A346C4E-2868-4820-A848-4F45F5B36E79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A346C4E-2868-4820-A848-4F45F5B36E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A346C4E-2868-4820-A848-4F45F5B36E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A346C4E-2868-4820-A848-4F45F5B36E79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3571760C-CF32-4776-857C-C41D32742623}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3571760C-CF32-4776-857C-C41D32742623}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3571760C-CF32-4776-857C-C41D32742623}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3571760C-CF32-4776-857C-C41D32742623}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B9850D56-C035-4209-90BD-60DEB3759F95}
+	EndGlobalSection
+EndGlobal
