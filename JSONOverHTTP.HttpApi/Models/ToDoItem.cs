@@ -5,7 +5,7 @@ namespace JSONOverHTTP.HttpApi.Models
     public class ToDoItem
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public string? Name { get; set; }
 

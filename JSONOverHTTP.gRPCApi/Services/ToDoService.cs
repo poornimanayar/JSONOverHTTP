@@ -29,27 +29,18 @@ namespace JSONOverHTTP.gRPCApi.Services
 
             listReply.ToDoItems.AddRange(todoItemsReply);
 
-
-            var metaData = new Metadata();
-
-            //access request headers
-            foreach (var header in context.RequestHeaders)
-            {
-                metaData.Add(header.Key, header.Value);
-            }
-
-            //add response headers
-            context.WriteResponseHeadersAsync(metaData);
-
-            //add response trailer
-            context.ResponseTrailers.Add("my-response-trailer", "my-response-trailer-value");
-
             return Task.FromResult(listReply);
         }
+
 
         public override Task<ToDoItemReply> GetToDoItem(ToDoItemRequest request, ServerCallContext context)
         {
             var todoItem = _toDoItemRepository.GetToDoItemById(request.Id);
+
+            if(todoItem == null)
+            {
+                throw new RpcException(new Status(StatusCode.NotFound,"todo item not found"));
+            }
 
             var toDoItemReply = new ToDoItemReply { Id = todoItem.Id, Complete = todoItem.Complete, DueDate = Timestamp.FromDateTime(todoItem.DueDate.ToUniversalTime()), Name = todoItem.Name, Notes = todoItem.Notes, Priority = todoItem.Priority, SendAlert = todoItem.SendAlert };
 

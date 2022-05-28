@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using JSONOverHTTP.HttpApi.Models;
+using JSONOverHTTP.HttpApi.Repository;
 
 namespace JSONOverHTTP.HttpApi.Controllers
 {
@@ -8,33 +8,28 @@ namespace JSONOverHTTP.HttpApi.Controllers
     [ApiController]
     public class ToDoItemsController : ControllerBase
     {
-        private readonly ToDoContext _context;
+        private readonly ToDoItemsRepository _toDoItemsRepository;
 
-        public ToDoItemsController(ToDoContext context)
+        public ToDoItemsController(ToDoItemsRepository toDoItemsRepository)
         {
-            _context = context;
+            _toDoItemsRepository = toDoItemsRepository;
         }
+
 
         // GET: api/ToDoItems
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ToDoItem>>> GetToDoItems()
+        public ActionResult<IEnumerable<ToDoItem>> GetToDoItems()
         {
-          if (_context.ToDoItems == null)
-          {
-              return NotFound();
-          }
-            return await _context.ToDoItems.ToListAsync();
+
+            return _toDoItemsRepository.GetToDoItems();
         }
 
         // GET: api/ToDoItems/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ToDoItem>> GetToDoItem(long id)
+        public ActionResult<ToDoItem> GetToDoItem(long id)
         {
-          if (_context.ToDoItems == null)
-          {
-              return NotFound();
-          }
-            var toDoItem = await _context.ToDoItems.FindAsync(id);
+          
+            var toDoItem = _toDoItemsRepository.GetToDoItemById(id);
 
             if (toDoItem == null)
             {
@@ -47,30 +42,14 @@ namespace JSONOverHTTP.HttpApi.Controllers
         // PUT: api/ToDoItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutToDoItem(long id, ToDoItem toDoItem)
+        public IActionResult PutToDoItem(long id, ToDoItem toDoItem)
         {
             if (id != toDoItem.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(toDoItem).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ToDoItemExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _toDoItemsRepository.UpdateToDoItem(toDoItem);
 
             return NoContent();
         }
@@ -78,15 +57,13 @@ namespace JSONOverHTTP.HttpApi.Controllers
         // POST: api/ToDoItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ToDoItem>> PostToDoItem(ToDoItem toDoItem)
+        public ActionResult<ToDoItem> PostToDoItem(ToDoItem toDoItem)
         {
-          if (_context.ToDoItems == null)
+          if (toDoItem == null)
           {
-              return Problem("Entity set 'ToDoContext.ToDoItems'  is null.");
+              return Problem("ToDoItem is null.");
           }
-            _context.ToDoItems.Add(toDoItem);
-            await _context.SaveChangesAsync();
-
+            _toDoItemsRepository.AddToDoItem(toDoItem);
 
             ///returns 201, adds location header that specifies the url of the newly added item
             return CreatedAtAction(nameof(GetToDoItem), new { id = toDoItem.Id }, toDoItem);
@@ -94,27 +71,12 @@ namespace JSONOverHTTP.HttpApi.Controllers
 
         // DELETE: api/ToDoItems/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteToDoItem(long id)
+        public IActionResult DeleteToDoItem(long id)
         {
-            if (_context.ToDoItems == null)
-            {
-                return NotFound();
-            }
-            var toDoItem = await _context.ToDoItems.FindAsync(id);
-            if (toDoItem == null)
-            {
-                return NotFound();
-            }
-
-            _context.ToDoItems.Remove(toDoItem);
-            await _context.SaveChangesAsync();
+            _toDoItemsRepository.DeleteToDoItem(id);
 
             return NoContent();
         }
 
-        private bool ToDoItemExists(long id)
-        {
-            return (_context.ToDoItems?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
     }
 }

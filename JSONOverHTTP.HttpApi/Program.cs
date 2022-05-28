@@ -1,5 +1,6 @@
 using JSONOverHTTP.HttpApi.Data;
 using JSONOverHTTP.HttpApi.Models;
+using JSONOverHTTP.HttpApi.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +20,7 @@ builder.Services.AddDbContext<ToDoContext>(opt => opt.UseSqlite($"Data Source={d
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddScoped<ToDoItemsRepository>();
 
 var app = builder.Build();
 

@@ -9,23 +9,24 @@ option csharp_namespace = "JSONOverHTTP.gRPCApi.Proto";
 package toDo;
 
 service ToDo{
-	rpc ListItems(google.protobuf.Empty) returns (ListReply){
-         option (google.api.http) = {
-        get: "/v1/todo/"
+	rpc ListItems(google.protobuf.Empty) returns (ListReply)
+    {
+        option (google.api.http) = {
+            get: "/v1/todo/"
         };
     }
 
-
-	rpc GetToDoItem(ToDoItemRequest) returns (ToDoItemReply){
-        
-         option (google.api.http) = {
-        get: "/v1/todo/{id}"
+	rpc GetToDoItem(ToDoItemRequest) returns (ToDoItemReply)
+    {        
+        option (google.api.http) = {
+            get: "/v1/todo/{id}"
         };
     }
-	rpc CreateToDoItem(CreateToDoItemRequest) returns (ToDoItemReply){
-         option (google.api.http) = {
-        post: "/v1/todo/",
-        body: "*"
+	rpc CreateToDoItem(CreateToDoItemRequest) returns (ToDoItemReply)
+    {
+        option (google.api.http) = {
+            post: "/v1/todo/",
+            body: "*"
         };
     };
 	rpc UpdateToDoItem(UpdateToDoItemRequest) returns (ToDoItemReply){
@@ -59,13 +60,13 @@ service ToDo{
         post: "/v1/todo:itemsbyduedate",
         };
     }
-     rpc SendAlert(ToDoItemRequest) returns (google.protobuf.Empty){
+    rpc SendAlert(ToDoItemRequest) returns (google.protobuf.Empty){
         
          option (google.api.http) = {
         post: "/v1/todo:sendalert",
         body:"*"
         };
-    }
+    }   
 
 }
 
