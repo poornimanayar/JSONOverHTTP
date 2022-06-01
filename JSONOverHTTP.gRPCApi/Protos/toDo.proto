@@ -2,6 +2,8 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
+
+
 import "google/api/annotations.proto";
 
 option csharp_namespace = "JSONOverHTTP.gRPCApi.Proto";
@@ -12,58 +14,58 @@ service ToDo{
 	rpc ListItems(google.protobuf.Empty) returns (ListReply)
     {
         option (google.api.http) = {
-            get: "/v1/todo/"
+            get: "/v1/todos/"
         };
     }
 
 	rpc GetToDoItem(ToDoItemRequest) returns (ToDoItemReply)
     {        
         option (google.api.http) = {
-            get: "/v1/todo/{id}"
+            get: "/v1/todos/{id}"
         };
     }
 	rpc CreateToDoItem(CreateToDoItemRequest) returns (ToDoItemReply)
     {
         option (google.api.http) = {
-            post: "/v1/todo/",
+            post: "/v1/todos/",
             body: "*"
         };
     };
 	rpc UpdateToDoItem(UpdateToDoItemRequest) returns (ToDoItemReply){
         
          option (google.api.http) = {
-        put: "/v1/todo/{id}",
+        put: "/v1/todos/{id}",
         body: "*"
         };
     }
 	rpc DeleteToDoItem(DeleteToDoItemRequest) returns (google.protobuf.Empty){
         
-         option (google.api.http) = {
-        delete: "/v1/todo/{id}"
+        option (google.api.http) = {
+        delete: "/v1/todos/{id}"
         };
     }
     rpc GetCompletedItems(google.protobuf.Empty) returns (ListReply){
         
-         option (google.api.http) = {
-        post: "/v1/todo:completeditems",
+        option (google.api.http) = {
+        get: "/v1/todos:completeditems",
         };
     }
     rpc GetInCompleteItems(google.protobuf.Empty) returns (ListReply){
         
-         option (google.api.http) = {
-        post: "/v1/todo:incompleteitems",
+        option (google.api.http) = {
+        get: "/v1/todos:incompleteitems",
         };
     }
     rpc GetItemsDueByDate(google.protobuf.Timestamp) returns (ListReply){
         
          option (google.api.http) = {
-        post: "/v1/todo:itemsbyduedate",
+        get: "/v1/todos:itemsbyduedate",
         };
     }
     rpc SendAlert(ToDoItemRequest) returns (google.protobuf.Empty){
         
          option (google.api.http) = {
-        post: "/v1/todo:sendalert",
+        post: "/v1/todos:sendalert",
         body:"*"
         };
     }   

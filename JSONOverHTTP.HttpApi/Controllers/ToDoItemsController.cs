@@ -55,7 +55,6 @@ namespace JSONOverHTTP.HttpApi.Controllers
         }
 
         // POST: api/ToDoItems
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public ActionResult<ToDoItem> PostToDoItem(ToDoItem toDoItem)
         {
